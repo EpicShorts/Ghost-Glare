@@ -1,5 +1,5 @@
 # GHOST GLARE
-
+https://itch.io/jam/jamsepticeye
 ## Dev Diary (Newest to Oldest)
 ### 02/10/2025
 Additions:
