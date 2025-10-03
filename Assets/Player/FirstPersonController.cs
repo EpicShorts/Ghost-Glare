@@ -113,7 +113,7 @@ public class FirstPersonController : MonoBehaviour
     {
         if (playerInputHandler.InteractTriggered)
         {
-            Debug.Log("Handle Interaction Script Triggered");
+            //Debug.Log("Handle Interaction Script Triggered");
         }
     }
 

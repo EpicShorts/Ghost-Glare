@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PickUpScript : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class PickUpScript : MonoBehaviour
     private GameObject heldObj; 
     private Rigidbody heldObjRb; 
     private bool canDrop = true; 
-    private int LayerNumber; 
+    private int LayerNumber;
 
     void Start()
     {
@@ -27,6 +28,7 @@ public class PickUpScript : MonoBehaviour
     void Update()
     {
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.red);
+
         if (playerInputHandler.InteractTriggered && (Time.time - lastInteractTime > interactCooldown)) 
         {
             lastInteractTime = Time.time;
@@ -43,6 +45,17 @@ public class PickUpScript : MonoBehaviour
 
                         //pass in object hit into the PickUpObject function
                         PickUpObject(hit.transform.gameObject);
+                    }
+                    // is this a bad way of doing this... yeah
+                    else if (hit.collider.CompareTag("interactable"))
+                    {
+                        Debug.Log("Interactable found");
+                        InteractableStatic objectscript = hit.collider.GetComponentInParent<InteractableStatic>();
+                        if (objectscript != null)
+                        {
+                            objectscript.Interact();
+                            Debug.Log("Interactable found and interacted");
+                        }
                     }
                 }
             }
