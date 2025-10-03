@@ -1,6 +1,14 @@
 # GHOST GLARE
 https://itch.io/jam/jamsepticeye
 ## Dev Diary (Newest to Oldest)
+### 03/10/2025
+Additions:
++ unverisal door script
++ basic materials for prototyping
++ Increased player height
+<img width="1014" height="556" alt="image" src="https://github.com/user-attachments/assets/c8a32bdb-1059-4eb7-8e1b-f7e009f9ae81" />
+<img width="1025" height="528" alt="image" src="https://github.com/user-attachments/assets/7722a7bf-3207-43cf-8d35-afc607b56598" />
+
 ### 02/10/2025
 Additions:
 + Player Controller
