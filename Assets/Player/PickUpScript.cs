@@ -21,9 +21,15 @@ public class PickUpScript : MonoBehaviour
     private bool canDrop = true; 
     private int LayerNumber;
 
+    private int layerToIgnore;
+    private int layerMask;
+
     void Start()
     {
-        LayerNumber = LayerMask.NameToLayer("HoldLayer"); 
+        LayerNumber = LayerMask.NameToLayer("HoldLayer");
+
+        int layerToIgnore = LayerMask.NameToLayer("MeatBox");
+        int layerMask = ~(1 << layerToIgnore);
     }
     void Update()
     {
@@ -39,8 +45,10 @@ public class PickUpScript : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange))
                 {
+                    Debug.Log("Hit " + hit.collider.name);
+
                     //make sure pickup tag is attached
-                    if (hit.transform.gameObject.tag == "canPickUp")
+                    if (hit.transform.gameObject.tag == "canPickUp" || hit.transform.gameObject.tag == "Meat")
                     {
 
                         //pass in object hit into the PickUpObject function
@@ -101,6 +109,7 @@ public class PickUpScript : MonoBehaviour
         Physics.IgnoreCollision(heldObj.GetComponent<Collider>(), player.GetComponent<Collider>(), false);
         heldObj.layer = 0;
 
+        heldObjRb.isKinematic = false;
         heldObjRb.useGravity = true;
         heldObjRb.angularDamping = 0.05f;
         heldObjRb.useGravity = true;
