@@ -8,6 +8,8 @@ public class BreakWhenHitBoneKnife : MonoBehaviour
 
     [SerializeField] private FallWhenBoardsBreak fallWhenBoardsBreak;
 
+    public AudioSource sawNoise;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +33,7 @@ public class BreakWhenHitBoneKnife : MonoBehaviour
             rb.constraints = RigidbodyConstraints.None;
             gameObject.layer = LayerMask.NameToLayer("Player");
             boxCollider.excludeLayers = LayerMask.GetMask("Player");
+            sawNoise.Play();
             Destroy(gameObject, 5f);
         }
     }

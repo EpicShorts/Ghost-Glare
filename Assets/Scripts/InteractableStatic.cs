@@ -6,6 +6,9 @@ public class InteractableStatic : MonoBehaviour
     [SerializeField] public char whichWayToOpen = 'a';
     [SerializeField] public bool minusDirection = true;
 
+    //public AudioClip openCloseSound;
+    public AudioSource openCloseSource;
+
     private bool hasOpened = false;
     private float directionChangeMultiply = 1f;
 
@@ -27,6 +30,7 @@ public class InteractableStatic : MonoBehaviour
         {
             hasOpened = true;
             RotateWhichDirection(whichWayToOpen, true);
+            openCloseSource.Play();
             //RotateInDirection(new Vector3(-90f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z), 1f);
             //Debug.Log("Rotating into: -90f, " + transform.rotation.eulerAngles.y + ", " + transform.rotation.eulerAngles.z);
         }
@@ -35,6 +39,7 @@ public class InteractableStatic : MonoBehaviour
             hasOpened = false;
             RotateWhichDirection(whichWayToOpen, false);
             //RotateInDirection(new Vector3(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z), 1f);
+            openCloseSource.Play();
         }
     }
 
@@ -83,6 +88,9 @@ public class InteractableStatic : MonoBehaviour
     {
         Quaternion startRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(eulerAngles);
+
+        // bad way, magic numbers eww
+        duration = 0.7f;
 
         float time = 0f;
         while (time < duration)

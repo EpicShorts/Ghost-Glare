@@ -16,7 +16,7 @@ public class PickUpScript : MonoBehaviour
     public float throwForce = 500f; 
     public float pickUpRange = 5f; 
     private float rotationSensitivity = 0.5f; 
-    private GameObject heldObj; 
+    public GameObject heldObj; // made public for meat box
     private Rigidbody heldObjRb; 
     private bool canDrop = true; 
     private int LayerNumber;

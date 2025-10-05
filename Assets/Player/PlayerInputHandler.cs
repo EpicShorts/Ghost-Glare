@@ -18,6 +18,7 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField] private string interact = "Interact";
     [SerializeField] private string attack = "Attack";
     [SerializeField] private string rotate = "Rotate";
+    [SerializeField] private string ghost = "Ghost";
 
     private InputAction movementAction;
     private InputAction rotationAction;
@@ -27,6 +28,7 @@ public class PlayerInputHandler : MonoBehaviour
     private InputAction interactAction;
     private InputAction attackAction;
     private InputAction rotateAction;
+    private InputAction ghostAction;
 
     public Vector2 MovementInput { get; private set; }
     public Vector2 RotationInput { get; private set; }
@@ -36,6 +38,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool CrouchTriggered { get; private set; }
     public bool AttackTriggered { get; private set; }
     public bool RotateTriggered { get; private set; }
+    public bool GhostTriggered { get; private set; }
 
     private void Awake()
     {
@@ -49,6 +52,7 @@ public class PlayerInputHandler : MonoBehaviour
         crouchAction = mapReference.FindAction(crouch);
         attackAction = mapReference.FindAction(attack);
         rotateAction = mapReference.FindAction(rotate);
+        ghostAction = mapReference.FindAction(ghost);
 
         SubscribeActionValuesToInputEvents();
     }
@@ -78,6 +82,9 @@ public class PlayerInputHandler : MonoBehaviour
 
         rotateAction.performed += inputInfo => RotateTriggered = true;
         rotateAction.canceled += inputInfo => RotateTriggered = false;
+
+        ghostAction.performed += inputInfo => GhostTriggered = true;
+        ghostAction.canceled += inputInfo => GhostTriggered = false;
     }
 
     private void OnEnable()
