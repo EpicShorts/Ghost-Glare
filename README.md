@@ -1,5 +1,8 @@
 # GHOST GLARE
 https://itch.io/jam/jamsepticeye
+https://epicshortsboy.itch.io/ghost-glare
+<img width="915" height="356" alt="image" src="https://github.com/user-attachments/assets/7250996c-0058-4ac2-a1ac-d92d24b0e8c4" />
+
 ## Dev Diary (Newest to Oldest)
 ### 05/10/2025
 Uploaded to Itch.Io 
