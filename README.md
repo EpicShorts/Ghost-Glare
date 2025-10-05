@@ -1,6 +1,27 @@
 # GHOST GLARE
 https://itch.io/jam/jamsepticeye
 ## Dev Diary (Newest to Oldest)
+### 05/10/2025
+Uploaded to Itch.Io 
+I have had no where near enough to complete this project to a good enough standard, however for the fun of the game jam,
+I have uploaded to Itch.Io, feel free to play it at: https://epicshortsboy.itch.io/ghost-glare
+
+Additions:
++ Bonesaw Puzzle 
++ Post processing
++ UV Tiled textures
++ Sounds
++ Main Menu
++ Ending?
+<img width="630" height="500" alt="1" src="https://github.com/user-attachments/assets/d4a03141-4892-409c-86d2-b04f390e9889" />
+<img width="630" height="500" alt="2" src="https://github.com/user-attachments/assets/d6f2dc2a-1504-4244-86c3-296fb8ed5b5d" />
+<img width="630" height="500" alt="3" src="https://github.com/user-attachments/assets/2530e051-c3a5-4576-8d71-ff3660ec8b77" />
+<img width="630" height="500" alt="4" src="https://github.com/user-attachments/assets/f1ab702e-fd5b-4388-9479-2e886a7b4be4" />
+<img width="630" height="500" alt="5" src="https://github.com/user-attachments/assets/b872c029-5af1-4c39-b7a9-e55389cc86a0" />
+<img width="1112" height="535" alt="image" src="https://github.com/user-attachments/assets/bb85b6a4-d791-428a-be4b-15b062a8f3f6" />
+
+
+
 ### 03/10/2025
 Additions:
 + unverisal door script
