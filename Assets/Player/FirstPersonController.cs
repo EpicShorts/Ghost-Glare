@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FirstPersonController : MonoBehaviour
@@ -7,6 +8,8 @@ public class FirstPersonController : MonoBehaviour
     [Header("Movement Speeds")]
     [SerializeField] private float walkSpeed = 3.0f;
     [SerializeField] private float sprintMultiplayer = 2.0f;
+    [SerializeField] private float crouchMultiplayer = 0.5f;
+    [SerializeField] private float standUpSpeed = 150f;
 
     [Header("Jump Parameters")]
     [SerializeField] private float jumpForce = 5.0f;
@@ -16,15 +19,26 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float mouseSensitivity = 0.1f;
     [SerializeField] private float upDownLookRange = 80.0f;
 
+    [Header("Crouch Parameters")]
+    [SerializeField] private float playerHeight = 2.0f;
+    [SerializeField] private float playerCrouchHeight = 1.0f;
+
     [Header("References")]
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private PlayerInputHandler playerInputHandler;
+    [SerializeField] private Transform topOfHead;
 
     private Vector3 currentMovement;
     private float verticalRotation;
-    // tenary operator, if sprint triggered is true, then multiply by sprint, else multiply by 1
-    private float CurrentSpeed => walkSpeed * (playerInputHandler.SprintTriggered ? sprintMultiplayer : 1);
+    private float standUpVelocity = 0f;
+    private float standUpOffset = 0.01f;
+    RaycastHit hit;
+    public bool canRotate = true;
+
+    private float CurrentSpeed => walkSpeed 
+        * (playerInputHandler.SprintTriggered ? sprintMultiplayer : 1) 
+        * (playerInputHandler.CrouchTriggered ? crouchMultiplayer : 1);
 
     void Start()
     {
@@ -36,6 +50,8 @@ public class FirstPersonController : MonoBehaviour
     {
         HandleMovement();
         HandleRotation();
+        HandleInteraction();
+        HandleCrouching();
     }
     private Vector3 CalculateWorldDirection()
     {
@@ -84,10 +100,40 @@ public class FirstPersonController : MonoBehaviour
 
     private void HandleRotation()
     {
+        if (!canRotate)
+            return;
         float mouseXRotation = playerInputHandler.RotationInput.x * mouseSensitivity;
         float mouseYRotation = playerInputHandler.RotationInput.y * mouseSensitivity;
 
         ApplyHorizontalRotation(mouseXRotation);
         ApplyVerticalRoation(mouseYRotation);
+    }
+
+    private void HandleInteraction()
+    {
+        if (playerInputHandler.InteractTriggered)
+        {
+            //Debug.Log("Handle Interaction Script Triggered");
+        }
+    }
+
+    private void HandleCrouching()
+    {
+        if (playerInputHandler.CrouchTriggered)
+        {
+            characterController.height = playerCrouchHeight;
+        }
+        else
+        {
+            // if wall is above, dont stand up yet
+            Debug.DrawRay(topOfHead.position, Vector3.up * 0.2f, Color.red);
+            if (Physics.Raycast(topOfHead.position, Vector3.up, out hit, 0.2f))
+                return;
+
+            if (characterController.height <= playerHeight - standUpOffset)
+            {
+                characterController.height = Mathf.SmoothDamp(characterController.height, playerHeight, ref standUpVelocity, standUpSpeed * Time.deltaTime);
+            }
+        }
     }
 }
